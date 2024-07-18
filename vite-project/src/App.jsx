@@ -25,10 +25,22 @@ return <div className="container">
 }
 function SearBar() {  
   const [Check , SetCheck] = useState(false)
+
+
+    const [value, setValue] = useState("");
+    function handleChange(e) {
+        setValue(e);
+        console.log(value);
+    }
+function ChangeCehck(params) {
+  SetCheck(!Check)
+}
+
+
 return <div >
   <div >
- <InputText value = "" onchange={() => null} placeholder = "Rechercher"/>
-    <Checkbox checked={Check} onchange={() => null} label= "rien"/>
+ <InputText value = {value} onChange={handleChange} placeholder = "Rechercher"/>
+    <Checkbox checked={Check}  onChange={ChangeCehck} label= "rien"/>
   </div>
 </div>
 }
