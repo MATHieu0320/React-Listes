@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 
 import { Checkbox } from './components/form/checbox';
 import { InputText } from './components/Textinputt';
+import { ProductTow } from './components/form/ProductRow';
 const PRODUCTS = [  
     {category: "Fruits", price: "$1", stocked: true, name: "Apple"},  
     {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},  
@@ -19,9 +20,12 @@ function App() {
 
 
 
-return <div className="container">
-  <SearBar/>
-</div>
+return    <ProductTow product={PRODUCTS}/>
+  
+
+ 
+
+
 }
 function SearBar() {  
   const [Check , SetCheck] = useState(false)
@@ -32,16 +36,18 @@ function SearBar() {
         setValue(e);
         console.log(value);
     }
-function ChangeCehck(params) {
+function ChangeCheck(params) {
   SetCheck(!Check)
+
 }
 
 
-return <div >
-  <div >
+return  <div >
+ 
  <InputText value = {value} onChange={handleChange} placeholder = "Rechercher"/>
-    <Checkbox checked={Check}  onChange={ChangeCehck} label= "rien"/>
-  </div>
+    <Checkbox checked={Check}  onChange={ChangeCheck} label= "rien"/>
+
+
 </div>
 }
 export default App
