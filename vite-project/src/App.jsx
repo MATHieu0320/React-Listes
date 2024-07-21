@@ -4,6 +4,9 @@ import reactLogo from './assets/react.svg'
 import { Checkbox } from './components/form/checbox';
 import { InputText } from './components/Textinputt';
 import { ProductTow } from './components/form/ProductRow';
+
+import { ProductsCate } from './components/form/ProductsCate';
+
 const PRODUCTS = [  
     {category: "Fruits", price: "$1", stocked: true, name: "Apple"},  
     {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},  
@@ -20,12 +23,21 @@ function App() {
 
 
 
-return    <ProductTow product={PRODUCTS}/>
+return  <ProductTable products={PRODUCTS.map((person) => <th> {person.name} </th>)}/>
   
 
  
 
 
+}function ProductTable({products}) {
+  return <table>
+    <thead>
+      <tr>
+        <th> {products} </th>
+        <th>Prix</th>
+      </tr>
+    </thead>
+  </table>
 }
 function SearBar() {  
   const [Check , SetCheck] = useState(false)
@@ -40,6 +52,7 @@ function ChangeCheck(params) {
   SetCheck(!Check)
 
 }
+
 
 
 return  <div >
