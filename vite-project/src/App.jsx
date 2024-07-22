@@ -6,6 +6,7 @@ import { InputText } from './components/Textinputt';
 import { ProductTow } from './components/form/ProductRow';
 
 import { ProductsCate } from './components/form/ProductsCate';
+import { Fragment } from 'react';
 
 const PRODUCTS = [  
     {category: "Fruits", price: "$1", stocked: true, name: "Apple"},  
@@ -19,21 +20,29 @@ const PRODUCTS = [
 
 
 function App() {
+return <Fragment>
 
+<SearBar />
+<ProductsCate name = "Fruits"/>
+<ProductTable />
 
+{/* <ProductsCate name={PRODUCTS[1,3].category}/> */}
+</Fragment>
+  //    return <table>
+  //   <thead>
+  //     <tr>
+  // <ProductTable products={PRODUCTS.map((person) => <th key={person.name}> {person.name} </th>)}/>
+  //     </tr>
+  //   </thead>
+  // </table>
 
+}
 
-return  <ProductTable products={PRODUCTS.map((person) => <th> {person.name} </th>)}/>
-  
-
- 
-
-
-}function ProductTable({products}) {
-  return <table>
+function ProductTable() {
+  return <table style={{textAlign: "center"}}>
     <thead>
       <tr>
-        <th> {products} </th>
+        <th> nom  </th>
         <th>Prix</th>
       </tr>
     </thead>
@@ -53,12 +62,11 @@ function ChangeCheck(params) {
 
 }
 
-
-
 return  <div >
  
  <InputText value = {value} onChange={handleChange} placeholder = "Rechercher"/>
     <Checkbox checked={Check}  onChange={ChangeCheck} label= "rien"/>
+
 
 
 </div>
