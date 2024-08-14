@@ -8,6 +8,7 @@ export function InputText({ placeholder, value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
+      <ul className="result"></ul>
     </div>
   );
 }

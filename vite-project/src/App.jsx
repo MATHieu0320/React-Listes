@@ -6,7 +6,7 @@ import { InputText } from "./components/Textinputt";
 import { ProductTow } from "./components/form/ProductRow";
 
 import { ProductsCate } from "./components/form/ProductsCate";
-import { CateAndStock } from "./components/form/CateAndStock";
+// import { CateAndStock } from "./components/form/CateAndStock";
 import { Fragment } from "react";
 
 const PRODUCTS = [
@@ -19,19 +19,24 @@ const PRODUCTS = [
 ];
 
 function App() {
-  const [stocked, SetStocked] = useState(false);
+  const [stockedD, SetStockedD] = useState(false);
+  const [search, Setsearch] = useState("");
   return (
     <Fragment>
-      <SearBar showStockedOnly={stocked} onststocked={SetStocked} />
+      <SearBar
+        stocked={stockedD}
+        onststockchange={SetStockedD}
+        Search={search}
+        OnSearChange={Setsearch}
+      />
       <ProductTable Products={PRODUCTS} />
-      <CateAndStock product={PRODUCTS} />
     </Fragment>
   );
 }
 
 function ProductTable({ Products }) {
   const rows = [];
-  console.log(rows);
+  // console.log(rows);
 
   let lastCategory = null;
 
@@ -57,10 +62,18 @@ function ProductTable({ Products }) {
     </table>
   );
 }
-function SearBar(showStockedOnly, onststocked) {
+function SearBar({ showStockedOnly, onststockchange, OnSearChange, Search }) {
   const [Check, SetCheck] = useState(false);
-
+  const htm = document.querySelector(".result");
   const [value, setValue] = useState("");
+  console.log(htm);
+
+  htm = PRODUCTS.filter((element) => {
+    element.category.includes(Search);
+    // console.log(element.category);
+  }).map((element) => {
+    `<h4>${element.category} </h4>`;
+  });
   // function handleChange(e) {
   //   setValue(e);
   //   console.log(value);
@@ -76,11 +89,15 @@ function SearBar(showStockedOnly, onststocked) {
 
   return (
     <div style={{ marginBottom: "20px" }}>
-      <InputText value={value} placeholder="Rechercher" />
+      <InputText
+        value={Search}
+        placeholder="Rechercher"
+        onChange={OnSearChange}
+      />
       <Checkbox
-        checked={showStockedOnly}
-        onChange={onststocked}
         id={"stocked"}
+        checked={showStockedOnly}
+        onChange={onststockchange}
         label={"n'afficher que les produits en stock"}
       />
     </div>
