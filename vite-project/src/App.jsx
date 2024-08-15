@@ -66,7 +66,7 @@ function SearBar({ showStockedOnly, onststockchange, OnSearChange, Search }) {
   const [Check, SetCheck] = useState(false);
   const htm = document.querySelector(".result");
   const [value, setValue] = useState("");
-  console.log(htm);
+  console.log(htmTYNB);
 
   htm = PRODUCTS.filter((element) => {
     element.category.includes(Search);
