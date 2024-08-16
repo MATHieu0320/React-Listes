@@ -1,4 +1,4 @@
-export function InputText({ placeholder, value, onChange }) {
+export function InputText({ placeholder, value, onChange, className }) {
   return (
     <div>
       <input
@@ -8,7 +8,7 @@ export function InputText({ placeholder, value, onChange }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <ul className="result"></ul>
+      <ul className={className}></ul>
     </div>
   );
 }

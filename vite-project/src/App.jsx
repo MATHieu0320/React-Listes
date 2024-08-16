@@ -1,5 +1,21 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
+function affiche(params) {
+  const Event = document.querySelector(".result");
+  console.log(Event);
+  Event.innerHTML = PRODUCTS.filter((element) =>
+    element.name.toLowerCase().includes("f")
+  )
+    .map(
+      (element) =>
+        `
+
+        <li>${element.name}</li>
+
+  `
+    )
+    .join(" ");
+}
 
 import { Checkbox } from "./components/checbox";
 import { InputText } from "./components/Textinputt";
@@ -7,8 +23,8 @@ import { ProductTow } from "./components/form/ProductRow";
 
 import { ProductsCate } from "./components/form/ProductsCate";
 // import { CateAndStock } from "./components/form/CateAndStock";
-import { Fragment } from "react";
 
+// import style from "./components/Textinputt/result"
 const PRODUCTS = [
   { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
   { category: "Fruits", price: "$6", stocked: true, name: "Dragonfruit" },
@@ -21,8 +37,12 @@ const PRODUCTS = [
 function App() {
   const [stockedD, SetStockedD] = useState(false);
   const [search, Setsearch] = useState("");
+
+  if (stockedD == true) {
+    affiche();
+  }
   return (
-    <Fragment>
+    <>
       <SearBar
         stocked={stockedD}
         onststockchange={SetStockedD}
@@ -30,7 +50,7 @@ function App() {
         OnSearChange={Setsearch}
       />
       <ProductTable Products={PRODUCTS} />
-    </Fragment>
+    </>
   );
 }
 
@@ -62,30 +82,11 @@ function ProductTable({ Products }) {
     </table>
   );
 }
+
 function SearBar({ showStockedOnly, onststockchange, OnSearChange, Search }) {
   const [Check, SetCheck] = useState(false);
-  const htm = document.querySelector(".result");
-  const [value, setValue] = useState("");
-  console.log(htmTYNB);
 
-  htm = PRODUCTS.filter((element) => {
-    element.category.includes(Search);
-    // console.log(element.category);
-  }).map((element) => {
-    `<h4>${element.category} </h4>`;
-  });
-  // function handleChange(e) {
-  //   setValue(e);
-  //   console.log(value);
-  // }
-  // function ChangeCheck() {
-  //   for (let i = 0; i < PRODUCTS.length; i++) {
-  //     if (PRODUCTS.stocked === true) {
-  //       console.log(PRODUCTS);
-  //     }
-  //   }
-  //   SetCheck(!Check);
-  // }
+  const [value, setValue] = useState("");
 
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -93,6 +94,7 @@ function SearBar({ showStockedOnly, onststockchange, OnSearChange, Search }) {
         value={Search}
         placeholder="Rechercher"
         onChange={OnSearChange}
+        className={"result"}
       />
       <Checkbox
         id={"stocked"}
@@ -104,3 +106,38 @@ function SearBar({ showStockedOnly, onststockchange, OnSearChange, Search }) {
   );
 }
 export default App;
+// });
+// const PRODUCTS = [
+//   { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
+//   { category: "Fruits", price: "$6", stocked: true, name: "Dragonfruit" },
+//   { category: "Fruits", price: "$5", stocked: false, name: "Passionfruit" },
+//   { category: "Vegetables", price: "$2", stocked: true, name: "Spinach" },
+//   { category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin" },
+//   { category: "Vegetables", price: "$12", stocked: true, name: "Peas" },
+// ];
+
+// const input = document.querySelector("input");
+// const affichage = document.getElementById("result");
+
+// console.log(affichage);
+// let valeur;
+// input.addEventListener("input", (e) => {
+//   valeur = e.target.value;
+//   affiche();
+// });
+
+// function affiche(params) {
+//   affichage.innerHTML = PRODUCTS.filter((element) =>
+//     element.name.toLowerCase().includes(valeur)
+//   )
+//     .map(
+//       (element) =>
+//         `<li>${element.name}</li>
+//   `
+//     )
+//     .join(" ");
+// }
+// const form = document.querySelector("form");
+// form.addEventListener("submit", (e) => {
+//   e.preventDefault();
+// });
