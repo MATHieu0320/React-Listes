@@ -1,21 +1,21 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
-function affiche(params) {
-  const Event = document.querySelector(".result");
-  console.log(Event);
-  Event.innerHTML = PRODUCTS.filter((element) =>
-    element.name.toLowerCase().includes("f")
-  )
-    .map(
-      (element) =>
-        `
+// function affiche() {
+//   const Event = document.querySelector(".result");
+//   console.log(Event);
+//   Event.innerHTML = PRODUCTS.filter((element) =>
+//     element.price.toLowerCase().includes("f")
+//   )
+//     .map(
+//       (element) =>
+//         `
 
-        <li>${element.name}</li>
+//         <li>${element.name}</li>
 
-  `
-    )
-    .join(" ");
-}
+//   `
+//     )
+//     .join(" ");
+// }
 
 import { Checkbox } from "./components/checbox";
 import { InputText } from "./components/Textinputt";
@@ -37,10 +37,15 @@ const PRODUCTS = [
 function App() {
   const [stockedD, SetStockedD] = useState(false);
   const [search, Setsearch] = useState("");
-
-  if (stockedD == true) {
-    affiche();
-  }
+  const visibleProducts = PRODUCTS.filter((product) => {
+    if (stockedD && !product.stocked) {
+      return false;
+    }
+    if (search && !product.name.includes(search)) {
+      return false;
+    }
+    return true;
+  });
   return (
     <>
       <SearBar
@@ -49,7 +54,7 @@ function App() {
         Search={search}
         OnSearChange={Setsearch}
       />
-      <ProductTable Products={PRODUCTS} />
+      <ProductTable Products={visibleProducts} />
     </>
   );
 }
